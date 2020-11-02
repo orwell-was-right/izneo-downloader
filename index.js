@@ -9,7 +9,7 @@ const archiver = require('archiver');
 const COOKIE = process.env.IZNEO_COOKIE;
 const [,, ...args] = process.argv;
 
-const ID = args[0].includes('izneo') ? args[0].split('/read/')[0].split('-').reverse()[0] : args[0];
+const ID = args[0] && args[0].includes('izneo') ? args[0].split('/read/')[0].split('-').reverse()[0] : args[0];
 
 if(!COOKIE) {
 	console.log(`Error: The 'IZNEO_COOKIE' environment variable is not set`);

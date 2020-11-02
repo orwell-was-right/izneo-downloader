@@ -39,7 +39,7 @@ Avec l'adresse complète copiée de votre navigateur:
 izneo-downloader "https://www.izneo.com/fr/roman-graphique/action-aventure/le-chat-du-rabbin-13312/le-chat-du-rabbin-tome-9-la-reine-de-shabbat-61987/read/16?exiturl=https:/"
 ```
 
-L'outil crée automatiquement un dossier avec le nom de la série et un sous-dossier avec le nom du tome.
+L'outil crée automatiquement un dossier avec le nom de la série et un fichier CBZ avec le nom du tome.
 
 # Limitations
 Contrairement à `izneo-get`, je n'ai pas voulu me lancer dans un outil offrant beaucoup d'options. Je pense qu'un terminal ou d'autres applications suffiront à combler ces manques.

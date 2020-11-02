@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "archiver": "^5.0.2",
     "node-fetch": "^2.6.1"
   },
   "bin": {

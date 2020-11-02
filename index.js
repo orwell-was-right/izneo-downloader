@@ -33,7 +33,7 @@ const downloadPage = async (page, location) => {
 	const imp = await subtle.importKey('raw', makeBuffer(page.key), 'AES-CBC', true, ['decrypt']);
 	const dec = await subtle.decrypt({ name: 'AES-CBC', iv: makeBuffer(page.iv) }, imp, encodedImage);
 
-	await fs.writeFileSync(path.join(location, `${String(pageNumber).padStart(3, '0')}.jpg`), Buffer.from(dec), 'binary');
+	fs.writeFileSync(path.join(location, `${String(pageNumber).padStart(3, '0')}.jpg`), Buffer.from(dec), 'binary');
 }
 
 const downloadBook = async() => {

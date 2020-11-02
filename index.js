@@ -4,6 +4,7 @@ const { subtle } = require('crypto').webcrypto;
 const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
+const archiver = require('archiver');
 
 const COOKIE = process.env.IZNEO_COOKIE;
 const [,, ...args] = process.argv;
@@ -36,6 +37,20 @@ const downloadPage = async (page, location) => {
 	fs.writeFileSync(path.join(location, `${String(pageNumber).padStart(3, '0')}.jpg`), Buffer.from(dec), 'binary');
 }
 
+const zip = async location => {
+	const output = fs.createWriteStream(`${location}.cbz`);
+	const archive = archiver('zip', { zlib: { level: 9 } });
+	archive.pipe(output);
+
+	output.on('close', () => { 
+		console.log(`Successfully saved as: ${location}.cbz`);
+		fs.rmdirSync(location, { recursive: true });
+	});
+
+	archive.directory(location, false);
+	archive.finalize();
+}
+
 const downloadBook = async() => {
 	const book = await fetch(`https://www.izneo.com/book/${ID}`, { headers: { COOKIE } });
 	const { data } = await book.json();
@@ -44,6 +59,7 @@ const downloadBook = async() => {
 	fs.mkdirSync(location, { recursive: true })
 
 	await Promise.all(data.pages.map(p => downloadPage(p, location)));
+	await zip(location);
 }
 
 downloadBook();
